@@ -47,12 +47,9 @@ export async function findAllUsers() {
     } finally {
         client && client.release();
     }
-    // return undefined;
 }
 
-// needs work
-// Captains and Sub CAptains can use this function
-// 
+
 export async function findById(id: number) {
     authMiddleware('Captain', 'Sub Captain', 'Grunt');
     let client: PoolClient;

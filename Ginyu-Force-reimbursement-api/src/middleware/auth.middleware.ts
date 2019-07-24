@@ -10,10 +10,8 @@
 
 export const authMiddleware = (...roles: string[]) => (req, res, next) => {
     const userRole = req.session.user.role;
-     // const userRole = req.session.Role;
     console.log('user role:', userRole);
     if (userRole) {
-       // if (roles.includes(userRole.role))
         if (roles.includes(userRole.role)) {
             next();
             return; // should return here.
@@ -21,5 +19,4 @@ export const authMiddleware = (...roles: string[]) => (req, res, next) => {
             res.sendStatus(403);
         }
     }
-    // res.sendStatus(401);
 };

@@ -14,26 +14,18 @@ export async function createReimbursement(reimbursement: Reimbursement) {
     let client: PoolClient;
     try {
         client = await connectionPool.connect();
-         // VALUES($1,$2,$3,$4,$5,$6,$7,$8);`;
         const queryString = `INSERT INTO reimbursement(author,amount,dateSubmitted,dateResolved,description,resolver,status,type)
-        VALUES($1,$2,$3,$4,$5,$6,$7,$8);`;
-        // VALUES((Select user_id From res_user where username='$1'),$2,TO_DATE('$3', 'DD/MM/YYYY')
-        //          ,TO_DATE('$4', 'DD/MM/YYYY'),'Test',
-        //        (Select user_id From res_user where username='$5'),
-        //        (Select status_id From reimbursement_status where status='$6'),
-        //         (Select type_id From reimbursement_type where type='$7'));
-        // `;
-        // const params = [reimbursement.type.type, reimbursement.author.userId, reimbursement.amount, reimbursement.description];
-        // const params = [reimbursement.author.userId, reimbursement.amount, reimbursement.dateSubmitted, reimbursement.dateResolved, reimbursement.resolver.userId, reimbursement.status, reimbursement.type];
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8)  RETURNING   reimbursement_id;`;
         const params = [reimbursement.author.userId, reimbursement.amount, reimbursement.dateSubmitted, reimbursement.dateResolved, reimbursement.description, reimbursement.resolver.userId, reimbursement.status, reimbursement.type];
         const result = await client.query(queryString, params);
-        return convertSQLReimbursement(result.rows);
+        return convertSQLReimbursement(result.rows[0]);
     } catch (err) {
         console.log(err);
-        return undefined;
+        // return undefined;
     } finally {
         client && client.release();
     }
+    return undefined;
 }
 
 export async function findByReimbursementStatus(status: string) {
@@ -69,10 +61,6 @@ export async function findByUserID(id: number) {
 		left join reimbursement_type on reimbursement.type=reimbursement_type.type_id
 		 WHERE resolver = $1;
         `;
-        // `select * from reimbursement r // inner join type using (type_id)
-        // inner join status using (status_id)
-        // inner join res_user z on (r.author = z.user_id) //  WHERE user_id = $1
-        // `;
         const result = await client.query(queryString, [id]);
         const sqlReimbursement = result.rows;
         return sqlReimbursement && sqlReimbursement.map(convertSQLReimbursement);
@@ -126,7 +114,7 @@ export async function patchReimbursement(reimbursement: Reimbursement) {
                 UPDATE reimbursement
                 SET  amount=$1,dateResolved=$2,resolver=$3, status=$4, type=$5
                 where  reimbursement_id=$6;`;
-        const params = [ reimbursement.amount, reimbursement.dateResolved , reimbursement.resolver.userId, reimbursement.status, reimbursement.type , reimbursement.reimbursementId];
+        const params = [reimbursement.amount, reimbursement.dateResolved, reimbursement.resolver.userId, reimbursement.status, reimbursement.type, reimbursement.reimbursementId];
         console.log(params);
         const result = await client.query(queryString, params);
         const sqlReimbursement = result.rows;
