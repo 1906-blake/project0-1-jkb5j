@@ -23,11 +23,11 @@ function safeAddReimbursementRow(reimbursement) {
     row.appendChild(amountData);
 
     const dateSubmittedData = document.createElement('td');
-    dateSubmittedData.innerText = reimbursement.dateSubmitted;
+    dateSubmittedData.innerText = reimbursement.dateSubmitted ? new  Date(reimbursement.dateSubmitted ).toDateString():'~';
     row.appendChild(dateSubmittedData);
 
     const dateResolvedData = document.createElement('td');
-    dateResolvedData.innerText = reimbursement.dateResolved ? new Date(reimbursement.dateResolved).toDateString() : '~'; //to date string add to other dates
+    dateResolvedData.innerText = reimbursement.dateResolved ? new Date(reimbursement.dateResolved).toDateString(): '~'; //to date string add to other dates
     row.appendChild(dateResolvedData);
 
     const descriptionData = document.createElement('td');
@@ -47,7 +47,7 @@ function safeAddReimbursementRow(reimbursement) {
                 Pending 
             </button>
             <div class="dropdown-menu" onclick="updateType(event, ${reimbursement.reimbursementId})">
-                <a class="dropdown-item" value='2' >Approved</a>
+                <a class="dropdown-item" value='1' >Approved</a>
                 <a class="dropdown-item" value='3' >Denied</a>
             </div>
         </div>`;
@@ -82,7 +82,7 @@ async function updateType(event, id) {
         },
         dateResolved: getCurrentDateTime(),
         status: {
-            statusId: dropdown.innerText === 'Approved' ? 2 : 3
+            statusId: dropdown.innerText === 'Approved' ? 1 : 3
         }
     }
     try {

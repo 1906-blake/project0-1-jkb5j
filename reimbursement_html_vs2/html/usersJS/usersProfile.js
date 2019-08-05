@@ -69,11 +69,11 @@ function safeAddReimbursementRow(reimbursement) {
     row.appendChild(amountData);
 
     const dateSubmittedData = document.createElement('td');
-    dateSubmittedData.innerText = reimbursement.dateSubmitted;
+    dateSubmittedData.innerText = reimbursement.dateSubmitted ? new  Date(reimbursement.dateSubmitted ).toDateString():'~' ;
     row.appendChild(dateSubmittedData);
 
     const dateResolvedData = document.createElement('td');
-    dateResolvedData.innerText = reimbursement.dateResolved ? reimbursement.dateResolved : '~';
+    dateResolvedData.innerText = reimbursement.dateResolved ? new  Date(reimbursement.dateResolved ).toDateString():'~';
     row.appendChild(dateResolvedData);
 
     const descriptionData = document.createElement('td');
