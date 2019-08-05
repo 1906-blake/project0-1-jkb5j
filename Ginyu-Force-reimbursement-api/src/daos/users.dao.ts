@@ -37,18 +37,27 @@ export async function findAllUsers() {
         client = await connectionPool.connect();
         const queryString = `
         SELECT *
-        FROM res_user`;
+        FROM res_user z
+         FULL JOIN role r
+        ON (z.role = r.role_id)`;
         const result = await client.query(queryString);
         const sqlUser = result.rows;
         return sqlUser && sqlUser.map(convertSQLUser);
     } catch (err) {
         console.log(err);
-     return undefined;
+        return undefined;
     } finally {
         client && client.release();
     }
 }
 
+// SELECT *
+// FROM res_user z
+// FULL JOIN role r
+// ON (z.role = r.role_id)
+
+// SELECT *
+//         FROM res_user
 
 export async function findById(id: number) {
     authMiddleware('Captain', 'Sub Captain', 'Grunt');

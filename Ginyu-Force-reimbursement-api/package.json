@@ -9,7 +9,7 @@
     "lint": "tslint src/**/*.ts",
     "lint:fix": "npm run lint -- --fix"
   },
-  "author": "Blake Kruppa",
+  "author": "Joseph Boakye",
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.17.0",

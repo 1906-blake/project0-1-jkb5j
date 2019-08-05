@@ -17,7 +17,7 @@ export const usersRouter = express.Router();
  *  access returns all users that are not
  * Captains or Sub Captains.
  */
-usersRouter.get('', [ authMiddleware('Captain', 'Sub Captain'),
+usersRouter.get('', [ authMiddleware('Captain', 'Sup Captain'),
                       async (req, res) => {
                               const users = await usersDAO.findAllUsers();
                                   res.json(users);
@@ -30,7 +30,7 @@ usersRouter.get('', [ authMiddleware('Captain', 'Sub Captain'),
  * Done
  */
 
-usersRouter.get('/:id', [authMiddleware('Captain', 'Sub Captain', 'Grunt'),
+usersRouter.get('/:id', [authMiddleware('Captain', 'Sup Captain', 'Grunt'),
 async (req, res) => {
     const currentUser = req.session.user;
     if (currentUser && (currentUser.userId === +req.params.id || currentUser.role.role === 'Captain' || currentUser.role.role === 'Sub Captain')) {
