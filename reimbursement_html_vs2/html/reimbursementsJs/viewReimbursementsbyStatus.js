@@ -69,6 +69,7 @@ function deletePreviousRows() {
         tableBody.removeChild(tableBody.firstChild);
     }
 }
+
 const myUser = JSON.parse(localStorage.getItem('user'));
 async function updateType(event, id) {
     console.log(event);

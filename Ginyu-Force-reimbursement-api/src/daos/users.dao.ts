@@ -39,7 +39,8 @@ export async function findAllUsers() {
         SELECT *
         FROM res_user z
          FULL JOIN role r
-        ON (z.role = r.role_id)`;
+        ON (z.role = r.role_id)
+      `;
         const result = await client.query(queryString);
         const sqlUser = result.rows;
         return sqlUser && sqlUser.map(convertSQLUser);
