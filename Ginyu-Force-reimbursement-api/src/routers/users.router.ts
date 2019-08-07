@@ -48,7 +48,7 @@ async (req, res) => {
  * only ones who may access this endpoint.
  */
 // usersRouter.patch('/:id', (req, res) => {
-   usersRouter.patch('', [authMiddleware('Captain'),
+   usersRouter.patch('', [authMiddleware('Captain', 'Sup Captain', 'Grunt'),
   // added ([ in front of async
    async (req, res) => {
       const userToUpdate = req.body;

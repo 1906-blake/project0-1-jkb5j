@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Creat New User</title>
+    <title></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- bootstrap css -->
@@ -20,7 +20,51 @@
 
 <body>
     <nav id="app-nav"></nav>
-   
+    <form>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="reimbursementId">Reimbursement Id</label>
+                    <input type="number" class="form-control" id="reimbursementId"
+                        disabled="disabled">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" id="author"
+                        disabled>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="reimbursementType">Event Type</label>
+                    <select id="reimbursementType" class="form-control">
+                        <option selected>Frieza Bucks</option>
+                        <option>Sensu Beans</option>
+                        <option>DargonBall<</option>
+                        <option>Learn Pose</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-9">
+                    <label for="description">Decription</label>
+                    <input type="text" class="form-control" id="description">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="amount">Aount</label>
+                    <input type="number" class="form-control" id="amount">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-5">
+                    <label for="dateSubmitted">Submit Date</label>
+                    <input type="date" class="form-control" id="dateSubmitted">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="reimbursementStatus">Reimbursement Status</label>
+                    <input type="text" class="form-control" id="reimbursementStatus" 
+                        placeholder="Pending" disabled>
+                </div>
+                <button type="submit" class="btn btn-primary col-md-3">Submit</button>
+            </div>
+        </form>
 
 </body>
 

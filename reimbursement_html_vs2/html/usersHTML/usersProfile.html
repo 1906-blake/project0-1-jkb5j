@@ -64,19 +64,21 @@
     <form id="new-reimbursement-form" onsubmit="submitNewReimbursement(event)">
         <!--author gotten from current user-->
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="input-field, col-md-3"></div>
+            <!-- <div class="form-group col-md-4"> -->
                 <label for="reimbursement-amount-input">Amount</label>
-                <input type="number"  id="reimbursement-amount-input">
-            </div>
-            <!--Date is current date-->
-            <div class="form-group col-md-6">
+                <input type="number" id="reimbursement-amount-input">
+            <!-- </div> -->
+            <!-- <div class="form-row col-md-4"> -->
                 <label for="reimbursement-description-input">Description</label>
                 <input type="text" id="reimbursement-description-input">
-            </div>
+            <!-- </div> -->
+            <div class="col-md-2"></div>
         </div>
         <!--status is automatically pending-->
         <div class="form-row">
-            <div class="form-group col-md-9">
+            <div class="col-md-2"></div>
+            <div class="form-group col-md-8">
                 <label class="input-group-text" for="inputGroupSelect01">Type</label>
                 <select class="custom-select" id="type-select" onchange="updateType(event)">
                     <option value="1">Frieza Bucks</option>
@@ -84,11 +86,9 @@
                     <option value="3">DargonBall</option>
                     <option value="4">Learn Pose</option>
                 </select>
+                <button class="btn btn-success" style="align-self: center" onclick="postReimbursement(event)">
+                    Submit</button>
             </div>
-            <div class="form-group col-md-3"></div>
-            <button class="btn btn-success" style="align-self: center" onclick="postReimbursement(event)">
-                Submit</button>
-        </div>
         </div>
     </form>
 
